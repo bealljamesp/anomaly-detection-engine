@@ -44,8 +44,10 @@ anomaly-detection-engine/
 ├── main.py                    # Pipeline execution script
 ├── pyproject.toml             # Package dependencies and dev configurations
 └── README.md                  # Technical documentation
+```
+---
 
-Example Output
+## Example Output
 
 🚀 Running Anomaly Detection Pipeline...
 Ingested 5000 records successfully.
@@ -82,6 +84,8 @@ shape: (1, 3)
 ╞════════════╪═════════════════╪════════════════╡
 │ 1071.61075 ┆ 38.616          ┆ 88.519353      │
 └────────────┴─────────────────┴────────────────┘
+
+---
 
 ## ⚡ Quick Start
 
