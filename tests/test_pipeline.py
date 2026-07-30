@@ -1,7 +1,11 @@
 import polars as pl
 
 from anomaly_engine.model import AnomalyDetector
-from anomaly_engine.pipeline import generate_synthetic_transactions, preprocess_features
+from anomaly_engine.pipeline import (
+    generate_synthetic_transactions,
+    ingest_cloud_ledger,
+    preprocess_features,
+)
 
 
 def test_data_generation():
@@ -18,7 +22,18 @@ def test_anomaly_detection():
     preds, scores = detector.fit_predict(X)
 
     assert len(preds) == 200
-    assert -1 in preds  # Ensure anomalies were detected
+    assert -1 in preds
+
+
+def test_parquet_roundtrip(tmp_path):
+    """Tests cloud-native Parquet storage and ingestion pipeline."""
+    file_path = tmp_path / "test_ledger.parquet"
+    df_orig = generate_synthetic_transactions(n_samples=50)
+    df_orig.write_parquet(file_path)
+
+    df_ingested = ingest_cloud_ledger(str(file_path))
+    assert df_ingested.height == 50
+    assert "transaction_id" in df_ingested.columns
 
 
 # def test_model_contamination_failure():

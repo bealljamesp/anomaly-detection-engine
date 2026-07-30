@@ -8,7 +8,7 @@
 
 The **Anomaly Detection Engine** is a modular, high-throughput Python framework designed to ingest, process, and evaluate high-dimensional transactional ledgers for latent anomalies, system logic failures, and compliance drift.
 
-Built with an emphasis on **rigorous MLOps governance**, this project demonstrates end-to-end data pipeline vectorization using **Polars**, unsupervised machine learning via **Isolation Forests**, automated unit testing with **Pytest**, continuous integration through **GitHub Actions**, and model interpretability using **SHAP (SHapley Additive exPlanations)**.
+Built with an emphasis on **rigorous MLOps governance**, this project demonstrates end-to-end data pipeline vectorization using **Polars**, unsupervised machine learning via **Isolation Forests**, automated unit testing with **Pytest**, continuous integration through **GitHub Actions**, cloud-native file storage ingestion (`pyarrow`/`s3fs`), containerization via **Docker**, and model interpretability using **SHAP (SHapley Additive exPlanations)**.
 
 This architecture reflects production oversight analytics applied in high-stakes auditing, risk scoring, and federal data governance environments (e.g., DHS Office of Inspector General).
 
@@ -92,7 +92,8 @@ shape: (1, 3)
 ## ⚡ Quick Start
 
 ```bash
-# Clone & Install
+# Clone & Install Locally
+
 git clone [https://github.com/bealljamesp/anomaly-detection-engine.git](https://github.com/bealljamesp/anomaly-detection-engine.git)
 cd anomaly-detection-engine
 
@@ -103,3 +104,11 @@ pytest
 
 # Execute Pipeline
 python main.py
+
+# Container Execution
+
+# Build Docker Image
+docker build -t anomaly-engine:latest .
+
+# Run Containerized Engine
+docker run --rm anomaly-engine:latest

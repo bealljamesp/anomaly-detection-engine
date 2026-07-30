@@ -2,35 +2,33 @@ import numpy as np
 import polars as pl
 
 
+def ingest_cloud_ledger(source_uri: str) -> pl.DataFrame:
+    """Ingests transactional ledgers directly from Cloud Object Storage (AWS S3, GCP, or Parquet).
+
+    Args:
+        source_uri: Path or cloud URI (e.g., 's3://ledger-bucket/transactions.parquet' or local file).
+    """
+    return pl.read_parquet(source_uri)
+
+
 def generate_synthetic_transactions(
-    n_samples: int = 10000,
-    anomaly_rate: float = 0.025,  # <--- Added parameter with clean default
-    seed: int = 42,
+    n_samples: int = 10000, anomaly_rate: float = 0.025, seed: int = 42
 ) -> pl.DataFrame:
-    """Generates synthetic high-throughput transactional dataset with injected anomalies."""
+    """Generates synthetic transactional dataset with injected anomalies."""
     np.random.seed(seed)
 
-    # Baseline normal transactions
     amount = np.random.exponential(scale=100.0, size=n_samples)
     transaction_count = np.random.poisson(lam=5, size=n_samples)
     risk_score_raw = np.random.normal(loc=50, scale=10, size=n_samples)
 
-    # Inject synthetic anomalies based on configured anomaly_rate
     n_anomalies = int(n_samples * anomaly_rate)
     anomaly_idx = np.random.choice(n_samples, size=n_anomalies, replace=False)
 
-    # Injected anomalies: scale amounts, increase transaction counts, and elevate risk scores
-    amount[anomaly_idx] *= np.random.uniform(
-        5, 15, size=n_anomalies
-    )  # 1. Extreme transaction amounts
-    transaction_count[anomaly_idx] += np.random.randint(
-        20, 50, size=n_anomalies
-    )  # 2. Unusually high transaction counts
-    risk_score_raw[anomaly_idx] += np.random.uniform(
-        30, 50, size=n_anomalies
-    )  # 3. Elevated risk scores
+    amount[anomaly_idx] *= np.random.uniform(5, 15, size=n_anomalies)
+    transaction_count[anomaly_idx] += np.random.randint(20, 50, size=n_anomalies)
+    risk_score_raw[anomaly_idx] += np.random.uniform(30, 50, size=n_anomalies)
 
-    df = pl.DataFrame(
+    return pl.DataFrame(
         {
             "transaction_id": [f"TXN-{i:06d}" for i in range(n_samples)],
             "amount": amount,
@@ -39,18 +37,20 @@ def generate_synthetic_transactions(
         }
     )
 
-    return df
-
 
 def preprocess_features(df: pl.DataFrame) -> np.ndarray:
     """Extracts and normalizes features using vectorized Polars operations."""
     feature_df = df.select(
-        [pl.col("amount").log1p(), pl.col("daily_txn_count"), pl.col("raw_risk_score")]
+        [
+            pl.col("amount").log1p(),
+            pl.col("daily_txn_count"),
+            pl.col("raw_risk_score"),
+        ]
     )
     return feature_df.to_numpy()
 
 
-# Pandas implementation for preprocessing features:
+# Pandas implementation for preprocessing_features:
 
 # import pandas as pd
 
