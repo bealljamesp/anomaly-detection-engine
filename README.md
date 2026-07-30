@@ -49,6 +49,7 @@ anomaly-detection-engine/
 
 ## Example Output
 
+```
 🚀 Running Anomaly Detection Pipeline...
 Ingested 5000 records successfully.
 ⚠️ Detected 125 anomalous transactions.
@@ -84,6 +85,7 @@ shape: (1, 3)
 ╞════════════╪═════════════════╪════════════════╡
 │ 1071.61075 ┆ 38.616          ┆ 88.519353      │
 └────────────┴─────────────────┴────────────────┘
+```
 
 ---
 
