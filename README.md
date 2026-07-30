@@ -44,3 +44,56 @@ anomaly-detection-engine/
 ├── main.py                    # Pipeline execution script
 ├── pyproject.toml             # Package dependencies and dev configurations
 └── README.md                  # Technical documentation
+
+Example Output
+
+🚀 Running Anomaly Detection Pipeline...
+Ingested 5000 records successfully.
+⚠️ Detected 125 anomalous transactions.
+shape: (5, 6)
+┌────────────────┬─────────────┬─────────────────┬────────────────┬──────────────┬───────────────┐
+│ transaction_id ┆ amount      ┆ daily_txn_count ┆ raw_risk_score ┆ anomaly_flag ┆ anomaly_score │
+│ ---            ┆ ---         ┆ ---             ┆ ---            ┆ ---          ┆ ---           │
+│ str            ┆ f64         ┆ i32             ┆ f64            ┆ bool         ┆ f64           │
+╞════════════════╪═════════════╪═════════════════╪════════════════╪══════════════╪═══════════════╡
+│ TXN-000018     ┆ 333.981371  ┆ 26              ┆ 76.257703      ┆ true         ┆ -0.005938     │
+│ TXN-000056     ┆ 57.952765   ┆ 48              ┆ 93.922475      ┆ true         ┆ -0.076843     │
+│ TXN-000088     ┆ 1498.813633 ┆ 39              ┆ 98.653787      ┆ true         ┆ -0.069733     │
+│ TXN-000104     ┆ 1634.895048 ┆ 28              ┆ 82.129535      ┆ true         ┆ -0.051309     │
+│ TXN-000155     ┆ 381.8864    ┆ 34              ┆ 72.890922      ┆ true         ┆ -0.02428      │
+└────────────────┴─────────────┴─────────────────┴────────────────┴──────────────┴───────────────┘
+
+--- BASELINE (NORMAL) TRANSACTIONS ---
+shape: (1, 3)
+┌───────────┬─────────────────┬────────────────┐
+│ amount    ┆ daily_txn_count ┆ raw_risk_score │
+│ ---       ┆ ---             ┆ ---            │
+│ f64       ┆ f64             ┆ f64            │
+╞═══════════╪═════════════════╪════════════════╡
+│ 98.942182 ┆ 5.018051        ┆ 49.842573      │
+└───────────┴─────────────────┴────────────────┘
+
+--- FLAGGED ANOMALOUS TRANSACTIONS ---
+shape: (1, 3)
+┌────────────┬─────────────────┬────────────────┐
+│ amount     ┆ daily_txn_count ┆ raw_risk_score │
+│ ---        ┆ ---             ┆ ---            │
+│ f64        ┆ f64             ┆ f64            │
+╞════════════╪═════════════════╪════════════════╡
+│ 1071.61075 ┆ 38.616          ┆ 88.519353      │
+└────────────┴─────────────────┴────────────────┘
+
+## ⚡ Quick Start
+
+```bash
+# Clone & Install
+git clone [https://github.com/bealljamesp/anomaly-detection-engine.git](https://github.com/bealljamesp/anomaly-detection-engine.git)
+cd anomaly-detection-engine
+
+pip install -e .[dev]
+
+# Run Test Suite
+pytest
+
+# Execute Pipeline
+python main.py
