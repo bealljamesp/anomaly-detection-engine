@@ -47,7 +47,7 @@ anomaly-detection-engine/
 ```
 ---
 
-## Example Output
+## 🔍 Example Output
 
 ```
 🚀 Running Anomaly Detection Pipeline...
