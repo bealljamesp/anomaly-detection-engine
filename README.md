@@ -1,4 +1,4 @@
-# anomoly-detection-engine
+# anomaly-detection-engine
 
 Cloud-Native Predictive Anomaly Detection Engine
 
