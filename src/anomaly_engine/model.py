@@ -3,9 +3,7 @@ from sklearn.ensemble import IsolationForest
 
 
 class AnomalyDetector:
-    def __init__(
-        self, contamination: float = 0.025, random_state: int = 42
-    ):  # <--- Updated default to 0.025
+    def __init__(self, contamination: float, random_state: int = 42):
         self.model = IsolationForest(
             contamination=contamination, random_state=random_state, n_jobs=-1
         )
