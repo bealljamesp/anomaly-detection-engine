@@ -1,4 +1,4 @@
-# Cloud-Native Anomaly Engine & MLOps Governance Framework
+# Machine Learning & Fraud/Anomaly Detection
 
 [![CI Test Suite](https://github.com/bealljamesp/anomaly-detection-engine/actions/workflows/tests.yml/badge.svg)](https://github.com/bealljamesp/anomaly-detection-engine/actions/workflows/tests.yml)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
