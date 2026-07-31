@@ -86,29 +86,3 @@ shape: (1, 3)
 │ 1071.61075 ┆ 38.616          ┆ 88.519353      │
 └────────────┴─────────────────┴────────────────┘
 ```
-
----
-
-## ⚡ Quick Start
-
-```bash
-# Clone & Install Locally
-
-git clone [https://github.com/bealljamesp/anomaly-detection-engine.git](https://github.com/bealljamesp/anomaly-detection-engine.git)
-cd anomaly-detection-engine
-
-pip install -e .[dev]
-
-# Run Test Suite
-pytest
-
-# Execute Pipeline
-python main.py
-
-# Container Execution
-
-# Build Docker Image
-docker build -t anomaly-engine:latest .
-
-# Run Containerized Engine
-docker run --rm anomaly-engine:latest
