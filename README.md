@@ -26,7 +26,7 @@ This architecture reflects production oversight analytics applied in high-stakes
 
 ---
 
-## 🏗️ Repository Architecture
+## 🛠️ Repository Architecture
 
 ```text
 anomaly-detection-engine/
